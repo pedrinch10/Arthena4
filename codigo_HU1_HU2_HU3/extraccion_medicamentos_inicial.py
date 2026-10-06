@@ -3,7 +3,7 @@ import pandas as pd
 import requests
 
 
-ARCHIVO_SALIDA = Path(__file__).resolve().parent / "medicamentos_artritis_reumatoide.xlsx"
+ARCHIVO_SALIDA = Path(__file__).resolve().parent.parent / "datos/medicamentos_artritis_reumatoide.xlsx"
 
 
 def obtener_todos_los_nregistros(enfermedad: str) -> list:

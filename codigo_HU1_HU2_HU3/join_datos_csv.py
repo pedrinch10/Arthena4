@@ -5,10 +5,10 @@ from pathlib import Path
 import pandas as pd
 
 
-DIRECTORIO = Path(__file__).resolve().parent
-ARCHIVO_ENTRADA = DIRECTORIO / "medicamentos_artritis_reumatoide_enriquecido.xlsx"
-ARCHIVO_NOMENCLATOR = DIRECTORIO / "20260924_Nomenclator_de_Facturacion.xls"
-ARCHIVO_SALIDA = DIRECTORIO / "medicamentos_artritis_reumatoide_con_precios.xlsx"
+DIRECTORIO = Path(__file__).resolve().parent.parent
+ARCHIVO_ENTRADA = DIRECTORIO / "datos/medicamentos_artritis_reumatoide_enriquecido.xlsx"
+ARCHIVO_NOMENCLATOR = DIRECTORIO / "datos/20260924_Nomenclator_de_Facturacion.xls"
+ARCHIVO_SALIDA = DIRECTORIO / "datos/medicamentos_artritis_reumatoide_con_precios.xlsx"
 
 COLUMNAS_NOMENCLATOR = [
     "Código Nacional",

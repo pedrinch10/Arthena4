@@ -8,9 +8,9 @@ import requests
 from bs4 import BeautifulSoup
 
 
-DIRECTORIO = Path(__file__).resolve().parent
-ARCHIVO_ENTRADA = DIRECTORIO / "medicamentos_artritis_reumatoide.xlsx"
-ARCHIVO_SALIDA = DIRECTORIO / "medicamentos_artritis_reumatoide_enriquecido.xlsx"
+DIRECTORIO = Path(__file__).resolve().parent.parent
+ARCHIVO_ENTRADA = DIRECTORIO / "datos/medicamentos_artritis_reumatoide.xlsx"
+ARCHIVO_SALIDA = DIRECTORIO / "datos/medicamentos_artritis_reumatoide_enriquecido.xlsx"
 PATRON_SECCION_44 = re.compile(r"^\s*4[.]4(?:\b|[.]|\s)", re.IGNORECASE)
 PATRON_GRAVES = re.compile(r"\bgraves?\b", re.IGNORECASE)
 
