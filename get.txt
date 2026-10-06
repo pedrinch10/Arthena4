@@ -1,0 +1,12 @@
+import requests
+
+url = "https://cima.aemps.es/cima/rest/medicamento?nregistro=61836"
+
+payload = {}
+headers = {
+  'Cookie': 'JSESSIONID=bEbKSdm2vhqT0m1-cZ-SrEbT2-fm2y7pFpkAiT5AN5oNegJdRnOv!962100432'
+}
+
+response = requests.request("GET", url, headers=headers, data=payload)
+
+print(response.text)

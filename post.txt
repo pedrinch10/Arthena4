@@ -1,0 +1,20 @@
+import requests
+import json
+
+url = "https://cima.aemps.es/cima/rest/buscarEnFichaTecnica"
+
+payload = json.dumps([
+  {
+    "seccion": "4.1",
+    "texto": "artritis reumatoide",
+    "contiene": 1
+  }
+])
+headers = {
+  'Cookie': 'JSESSIONID=bEbKSdm2vhqT0m1-cZ-SrEbT2-fm2y7pFpkAiT5AN5oNegJdRnOv!962100432',
+  'Content-Type': 'application/json'
+}
+
+response = requests.request("POST", url, headers=headers, data=payload)
+
+print(response.text)

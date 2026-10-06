@@ -1,0 +1,36 @@
+# === Entornos Virtuales ===
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# === Caché de Python y Archivos Compilados ===
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+
+# === Herramientas de Calidad, Tests y Linters ===
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.nox/
+.tox/
+
+# === Archivos de Jupyter Notebook / VS Code / PyCharm ===
+.ipynb_checkpoints/
+.vscode/
+.idea/
+
+# === Archivos de Sistema Operativo ===
+.DS_Store
+Thumbs.db
+
+# === Archivos de Entorno y Secretos ===
+.env
+*.log
+~$*.docx
