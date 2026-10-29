@@ -12,7 +12,11 @@ ARCHIVO_SALIDA = DIRECTORIO / "datos/medicamentos_artritis_reumatoide_con_precio
 
 COLUMNAS_NOMENCLATOR = [
     "Código Nacional",
-    "Precio de referencia"
+    "Estado",
+    "Precio de venta al público con IVA",
+    "Precio de referencia",
+    "Tratamiento de larga duración",
+    "Especial control médico"
 ]
 
 
@@ -46,7 +50,8 @@ def main() -> None:
     coincidencias = df_final["Precio de referencia"].notna().sum()
     print(f"Excel final guardado: {ARCHIVO_SALIDA.name}")
     print(f"Precios de referencia obtenidos: {coincidencias} valores disponibles")
-
+    print(f"El dataframe origina enriquecido tiene :(filas,columnas) {df_hu2.shape}")
+    print(f"El dataframe con mas informacion oficial tiene: (filas, columnas) {df_final.shape}")
 
 if __name__ == "__main__":
     main()
