@@ -45,7 +45,7 @@ def main() -> None:
     df_hu2 = pd.read_excel(ARCHIVO_ENTRADA)
     df_nomenclator = pd.read_excel(ARCHIVO_NOMENCLATOR)
     df_final = enriquecer_medicamentos(df_hu2, df_nomenclator)
-    df_final.to_excel(ARCHIVO_SALIDA, index=False)
+    #df_final.to_excel(ARCHIVO_SALIDA, index=False)
 
     coincidencias = df_final["Precio de referencia"].notna().sum()
     print(f"Excel final guardado: {ARCHIVO_SALIDA.name}")
