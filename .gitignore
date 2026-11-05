@@ -34,3 +34,6 @@ Thumbs.db
 .env
 *.log
 ~$*.docx
+
+# === Salidas generadas por los notebooks ===
+codigo_HU4_HU5/salida_HU4/
