@@ -1,9 +1,9 @@
 """HU-6: carga en MySQL y vista de KPIs (versión script del notebook del grupo).
 
-Es codigo_HU6/HU6_carga_mysql.ipynb sin las consultas de exploración. Cambios para que
+Es codigo_HU4_HU5/HU6_carga_mysql.ipynb sin las consultas de exploración. Cambios para que
 pueda ejecutarse solo, sin nadie delante:
-  - La clave de MySQL NO se pide con getpass(): se lee de la variable de entorno
-    ARTHENA_MYSQL_PWD (y opcionalmente host, puerto, usuario y base, ver CONFIG_MYSQL).
+  - La configuración de MySQL se lee del config.json local. Si falta la contraseña,
+    se usa la variable de entorno ARTHENA_MYSQL_PWD.
   - Las verificaciones del notebook se convierten en controles: si algo no cuadra se hace
     ROLLBACK y se lanza un error, para que el script maestro lo registre y pare.
 
@@ -13,6 +13,7 @@ Salidas : tabla arthena.medicamentos y vista arthena.vista_kpi_medicamentos
           datos/medicamentos_artritis_reumatoide_kpis.csv      (copia de la vista para Power BI)
 """
 
+import json
 import logging
 import os
 import sys
@@ -22,21 +23,8 @@ from pathlib import Path
 import mysql.connector
 import pandas as pd
 
-import json
-
-# Abrir y leer el archivo JSON
-with open('config.json', 'r') as file:
-    config_data = json.load(file)
-
-# Asignar los valores a tu diccionario CONFIG_MYSQL
-CONFIG_MYSQL = {
-    "host": config_data.get("host", "localhost"),
-    "port": int(config_data.get("port", 3306)),
-    "user": config_data.get("user", "arthena_app"),
-    "database": config_data.get("database", "arthena")
-}
-
 RAIZ = Path(__file__).resolve().parent.parent
+RUTA_CONFIG_MYSQL = RAIZ / "config.json"
 DATOS = RAIZ / "datos"
 RUTA_CLUSTERS = DATOS / "medicamentos_artritis_reumatoide_clusters.csv"
 RUTA_HU4 = DATOS / "medicamentos_artritis_reumatoide_hu4.xlsx"
@@ -125,11 +113,21 @@ def preparar_datos() -> pd.DataFrame:
 
 
 def conectar():
-    clave = os.getenv("ARTHENA_MYSQL_PWD")
+    with RUTA_CONFIG_MYSQL.open(encoding="utf-8") as archivo:
+        config = json.load(archivo)
+
+    clave = config.get("password") or os.getenv("ARTHENA_MYSQL_PWD")
     if not clave:
-        raise RuntimeError("Falta la variable de entorno ARTHENA_MYSQL_PWD con la clave de MySQL")
-    conn = mysql.connector.connect(password=clave, **CONFIG_MYSQL)
-    log.info("Conectado a MySQL %s@%s/%s", CONFIG_MYSQL["user"], CONFIG_MYSQL["host"], CONFIG_MYSQL["database"])
+        raise RuntimeError("Falta la clave de MySQL en config.json o en ARTHENA_MYSQL_PWD")
+
+    conexion = {
+        "host": config.get("host", "localhost"),
+        "port": int(config.get("port", 3306)),
+        "user": config.get("user", "arthena_app"),
+        "database": config.get("database", "arthena"),
+    }
+    conn = mysql.connector.connect(password=clave, **conexion)
+    log.info("Conectado a MySQL %s@%s/%s", conexion["user"], conexion["host"], conexion["database"])
     return conn
 
 
