@@ -37,3 +37,6 @@ Thumbs.db
 
 # === Salidas generadas por los notebooks ===
 codigo_HU4_HU5/salida_HU4/
+
+# === Config ===
+config.json

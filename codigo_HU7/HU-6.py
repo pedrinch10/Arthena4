@@ -22,18 +22,25 @@ from pathlib import Path
 import mysql.connector
 import pandas as pd
 
+import json
+
+# Abrir y leer el archivo JSON
+with open('config.json', 'r') as file:
+    config_data = json.load(file)
+
+# Asignar los valores a tu diccionario CONFIG_MYSQL
+CONFIG_MYSQL = {
+    "host": config_data.get("host", "localhost"),
+    "port": int(config_data.get("port", 3306)),
+    "user": config_data.get("user", "arthena_app"),
+    "database": config_data.get("database", "arthena")
+}
+
 RAIZ = Path(__file__).resolve().parent.parent
 DATOS = RAIZ / "datos"
 RUTA_CLUSTERS = DATOS / "medicamentos_artritis_reumatoide_clusters.csv"
 RUTA_HU4 = DATOS / "medicamentos_artritis_reumatoide_hu4.xlsx"
 RUTA_KPIS = DATOS / "medicamentos_artritis_reumatoide_kpis.csv"
-
-CONFIG_MYSQL = {
-    "host": os.getenv("ARTHENA_MYSQL_HOST", "localhost"),
-    "port": int(os.getenv("ARTHENA_MYSQL_PORT", "3306")),
-    "user": os.getenv("ARTHENA_MYSQL_USER", "arthena_app"),
-    "database": os.getenv("ARTHENA_MYSQL_DB", "arthena"),
-}
 
 COLS_EXTRA = ["cn", "pactivos", "precio_referencia", "num_excipientes",
               "forma_farmaceutica_simplificada", "precio_rellenado"]
