@@ -1,0 +1,1 @@
+Para poder ejecutar el archivo `Arthena_artritis_reumatoide.py` es necesario crear un `config.json` con la estructura de `config.example.json` con los datos necesarios para acceder a la base de datos en el HU6.
