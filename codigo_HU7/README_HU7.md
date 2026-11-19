@@ -10,7 +10,7 @@
 | `HU-5.py` | K-Means (k = 6) y nombres de cluster de `HU5_KMeans.ipynb` | `..._modelo.xlsx`, `..._hu4.xlsx` | `..._clusters.csv` |
 | `HU-6.py` | Carga en MySQL y vista de KPIs de `HU6_carga_mysql.ipynb` | `..._clusters.csv`, `..._hu4.xlsx` | tabla `medicamentos`, vista `vista_kpi_medicamentos`, `..._kpis.csv` |
 
-Los notebooks **se quedan** como están: ahí está el análisis (gráficas, elección de k, comprobaciones).
+Los notebooks contienen el análisis (gráficas, elección de k, comprobaciones).
 Los `.py` son la parte que transforma datos y puede ejecutarse sola.
 
 ## Antes de la primera ejecución (una sola vez)
@@ -20,14 +20,10 @@ Los `.py` son la parte que transforma datos y puede ejecutarse sola.
    .venv\Scripts\pip install scikit-learn mysql-connector-python
    ```
    (y añadir `scikit-learn>=1.3` y `mysql-connector-python>=8.0` a `requirements.txt`).
-2. Guardar la configuración de MySQL en variables de entorno del usuario (en una terminal de Windows):
-   ```
-   setx ARTHENA_MYSQL_PWD "tu_clave"
-   setx ARTHENA_MYSQL_USER "arthena_app"
-   ```
-   `setx` solo afecta a las terminales **nuevas**: cierra la terminal y abre otra.
-   Si en tu MySQL no existe `arthena_app`, pon el usuario que uses (el notebook del grupo usa `root`).
-   Opcionales: `ARTHENA_MYSQL_HOST` (localhost), `ARTHENA_MYSQL_PORT` (3306) y `ARTHENA_MYSQL_DB` (arthena).
+2. Usar el `config.json` local en la raíz de `Arthena4` para el script y el notebook de HU-6.
+   El archivo está excluido de Git. Los campos `host`, `port`, `user` y `database` tienen como valores
+   por defecto `localhost`, `3306`, `arthena_app` y `arthena`. Indica tu usuario de MySQL en `user`
+   y su contraseña en `password`. Si omites `password` o lo dejas vacío, se usa `ARTHENA_MYSQL_PWD`.
 
 ## Ejecutarlo a mano
 
@@ -88,8 +84,7 @@ Vuelve a ponerle el nombre original.
    cada salida exista y tenga fecha de esta ejecución.
 4. **Rutas con `Path(__file__)`.** El Programador de Tareas no arranca en vuestra carpeta: `"../datos"` fallaría.
 5. **Nada interactivo.** Sin `plt.show()` (bloquea) ni `getpass()` (nadie puede escribir la clave a las 3:00).
-   La clave está en una variable de entorno, no en el código ni en GitHub. Límite honesto: `setx` la guarda
-   sin cifrar en el registro de tu usuario de Windows. Es aceptable para el proyecto; en producción iría a un gestor de secretos.
+   MySQL usa la clave de `config.json` o de `ARTHENA_MYSQL_PWD`. El archivo local guarda la clave en texto plano.
 6. **Se puede repetir.** La HU-6 hace `DROP TABLE IF EXISTS` + `CREATE`, y la vista usa `CREATE OR REPLACE VIEW`:
    ejecutar el flujo dos veces no duplica filas.
 7. **Un log por día.** Los handlers de `logging` escriben a la vez en el fichero y en la consola, con hora, nivel y paso.
