@@ -20,11 +20,11 @@ logging.basicConfig(filename=LOG_FILE, level=logging.INFO,
 
 # (HU, función que la ejecuta, columnas que debe traer con datos al terminar)
 PASOS = [
-    ("HU-1", HU1_HU3.hu1, ["nregistro", "cn", "url_html_ficha_tecnica"]),
-    ("HU-2", HU1_HU3.hu2, ["volumen_informativo_seguridad", "complejidad_desglose_clinico", "indicador_riesgo_severo"]),
-    ("HU-3", HU1_HU3.hu3, ["Estado", "Precio de venta al público con IVA", "Precio de referencia"]),
-    ("HU-4", HU_4.main, ["dosis_mg", "antiguedad_anios", "pvp_iva", "forma_agrupada"]),
-    ("HU-5", HU_5.main, ["cluster", "nombre_cluster"]),
+    #("HU-1", HU1_HU3.hu1, ["nregistro", "cn", "url_html_ficha_tecnica"]),
+    #("HU-2", HU1_HU3.hu2, ["volumen_informativo_seguridad", "complejidad_desglose_clinico", "indicador_riesgo_severo"]),
+    #("HU-3", HU1_HU3.hu3, ["Estado", "Precio de venta al público con IVA", "Precio de referencia"]),
+    #("HU-4", HU_4.main, ["dosis_mg", "antiguedad_anios", "pvp_iva", "forma_agrupada"]),
+    #("HU-5", HU_5.main, ["cluster", "nombre_cluster"]),
     ("HU-6", HU_6.main, ["nregistro", "cluster"]),
 ]
 

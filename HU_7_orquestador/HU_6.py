@@ -17,7 +17,7 @@ COLUMNAS = ["nregistro", "cn", "nombre", "pactivos", "forma_farmaceutica_simplif
             "cluster", "nombre_cluster", "pvp_iva", "precio_referencia", "tiene_precio",
             "volumen_informativo_seguridad", "complejidad_desglose_clinico", "indicador_riesgo_severo",
             "num_principios_activos", "num_excipientes", "comercializado", "generico", "biosimilar",
-            "antiguedad_anios"]
+            "antiguedad_anios","url_html_ficha_tecnica","url_foto_materiales"]
 
 SQL_TABLA = """
 CREATE TABLE IF NOT EXISTS medicamentos (
@@ -41,6 +41,8 @@ CREATE TABLE IF NOT EXISTS medicamentos (
     generico                         TINYINT(1),
     biosimilar                       TINYINT(1),
     antiguedad_anios                 DECIMAL(5,1),
+    url_html_ficha_tecnica           VARCHAR(300),
+    url_foto_materiales              VARCHAR(300),
     PRIMARY KEY (nregistro)
 )"""
 
