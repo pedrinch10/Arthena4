@@ -18,7 +18,8 @@ COLUMNAS = ["nregistro", "cn", "nombre", "pactivos", "forma_farmaceutica_simplif
             "volumen_informativo_seguridad", "complejidad_desglose_clinico", "indicador_riesgo_severo",
             "num_principios_activos", "num_excipientes", "comercializado", "generico", "biosimilar",
             "antiguedad_anios","url_html_ficha_tecnica","url_foto_materiales","fecha_autorizacion",
-            "fecha_revision"]
+            "fecha_revision","requiere_receta", "afecta_conduccion", "triangulo_negro",
+            "medicamento_huerfano"]
 
 SQL_TABLA = """
 CREATE TABLE IF NOT EXISTS medicamentos (
@@ -48,6 +49,10 @@ CREATE TABLE IF NOT EXISTS medicamentos (
     labcomercializador               VARCHAR(100),
     fecha_autorizacion               DATE,
     fecha_revision                   DATE,
+    requiere_receta                  TINYINT(1),
+    afecta_conduccion                TINYINT(1),
+    triangulo_negro                  TINYINT(1),
+    medicamento_huerfano             TINYINT(1),
     PRIMARY KEY (nregistro)
 )"""
 
