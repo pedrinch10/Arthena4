@@ -19,7 +19,7 @@ COLUMNAS = ["nregistro", "cn", "nombre", "pactivos", "forma_farmaceutica_simplif
             "num_principios_activos", "num_excipientes", "comercializado", "generico", "biosimilar",
             "antiguedad_anios","url_html_ficha_tecnica","url_foto_materiales","fecha_autorizacion",
             "fecha_revision","requiere_receta", "afecta_conduccion", "triangulo_negro",
-            "medicamento_huerfano"]
+            "medicamento_huerfano", "labtitular", "labcomercializador"]
 
 SQL_TABLA = """
 CREATE TABLE IF NOT EXISTS medicamentos (
